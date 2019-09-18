@@ -35,15 +35,47 @@ class _CounterPageState extends State<CounterPage> {
           mainAxisAlignment: MainAxisAlignment.center,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.redAccent,
-          child: Icon(Icons.add),
-          onPressed: () {
-            setState(() {
-              this._count++;
-            });
-          }),
+      floatingActionButton: _createButtons(),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      
     );
+  }
+
+  Widget _createButtons() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        SizedBox(
+          width: 30.0,
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.exposure_zero),
+          onPressed: _reset,
+        ),
+        Expanded(
+          child: SizedBox(),
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.remove),
+          onPressed: substract,
+        ),
+        FloatingActionButton(
+          child: Icon(Icons.add),
+          onPressed: _add,
+        )
+      ],
+    );
+  }
+
+  void substract() {
+    setState(() => _count--);
+  }
+
+  void _add() {
+    setState(() => _count++);
+  }
+
+  void _reset() {
+    setState(() => _count = 0);
   }
 }
